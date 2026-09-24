@@ -1,0 +1,115 @@
+name: Release
+
+# When pushing a v* tag:
+#    1. Generate a changelog and create a GitHub Release
+#    2. Publish the signed artifacts to Maven Central (skipped for pre-releases)
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+env:
+  MAVEN_ARGS: -B -ntp
+
+jobs:
+  changelog:
+    name: Changelog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Generate changelog
+        uses: orhun/git-cliff-action@v4
+        with:
+          config: cliff.toml
+          # Prerelease tags (containing '-', such as v1.0.0-rc.1) are not yet included in cliff's tag sequence; generate them using --unreleased.
+          args: ${{ contains(github.ref_name, '-') && format('--unreleased --tag {0}', github.ref_name) || '--latest' }} --strip header
+        env:
+          OUTPUT: CHANGES.md
+          GITHUB_REPO: ${{ github.repository }}
+
+      - name: Create release
+        uses: softprops/action-gh-release@v3
+        with:
+          body_path: CHANGES.md
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # SemVer pre-release versions (containing "-") are automatically marked as Pre-release.
+          prerelease: ${{ contains(github.ref_name, '-') }}
+
+  # To publish to Maven Central you need four repository secrets, under
+  # Settings -> Secrets and variables -> Actions:
+  #
+  #   CENTRAL_TOKEN_USERNAME / CENTRAL_TOKEN_PASSWORD
+  #       A user token from https://central.sonatype.com/account
+  #   GPG_PRIVATE_KEY / GPG_PASSPHRASE
+  #       An ASCII-armoured private key whose public half is on a keyserver
+  #
+  # The com.burstlinker namespace also has to be verified once, by adding a DNS
+  # TXT record to burstlinker.com. Publishing fails without it.
+  publish:
+    name: Publish to Maven Central
+    needs: [changelog]
+    # Pre-release tags create a GitHub Release but are not published: Maven
+    # Central is immutable, and a mistaken coordinate cannot be withdrawn.
+    if: ${{ !failure() && !cancelled() && !contains(github.ref_name, '-') }}
+    runs-on: ubuntu-latest
+    env:
+      CENTRAL_TOKEN_USERNAME: ${{ secrets.CENTRAL_TOKEN_USERNAME }}
+    steps:
+      - name: Skip notice
+        if: env.CENTRAL_TOKEN_USERNAME == ''
+        run: echo "::notice::CENTRAL_TOKEN_USERNAME secret is not configured; skipping Maven Central publishing"
+
+      - uses: actions/checkout@v7
+        if: env.CENTRAL_TOKEN_USERNAME != ''
+
+      - uses: actions/setup-java@v5
+        if: env.CENTRAL_TOKEN_USERNAME != ''
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+          # Writes a settings.xml with a <server> whose id matches the one the
+          # publishing plugin expects, and imports the signing key.
+          server-id: central
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
+      # Three things must agree before anything is uploaded, because Maven
+      # Central never lets a coordinate be replaced: the git tag, the POM
+      # version, and the VERSION constant the SDK reports in its User-Agent.
+      - name: Verify tag matches the POM and the VERSION constant
+        if: env.CENTRAL_TOKEN_USERNAME != ''
+        run: |
+          pom=$(mvn $MAVEN_ARGS -q help:evaluate -Dexpression=project.version -DforceStdout)
+          tag="${GITHUB_REF_NAME#v}"
+          src=$(sed -n 's/.*String VERSION = "\([^"]*\)".*/\1/p' \
+                src/main/java/com/burstlinker/ezcapsolver/Version.java)
+
+          echo "tag=$tag pom=$pom Version.java=$src"
+
+          if [ "$pom" != "$tag" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match pom.xml version $pom"
+            exit 1
+          fi
+          if [ "$src" != "$tag" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match Version.VERSION $src"
+            exit 1
+          fi
+
+      # The release profile adds the sources jar, the delomboked javadoc jar and
+      # the GPG signatures that Central requires, then uploads the bundle.
+      - name: Publish
+        if: env.CENTRAL_TOKEN_USERNAME != ''
+        run: mvn $MAVEN_ARGS -P release -DskipTests deploy
+        env:
+          MAVEN_USERNAME: ${{ secrets.CENTRAL_TOKEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.CENTRAL_TOKEN_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}

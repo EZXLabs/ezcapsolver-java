@@ -1,0 +1,36 @@
+version: 2
+updates:
+  # Maven
+  #
+  # Several dependencies are deliberately pinned to their last Java 8 release
+  # (Jackson 2.x, JUnit 5.x, Mockito 4.11.0, OkHttp 4.x). Major-version bumps
+  # for those will not build and should be closed rather than merged, unless
+  # the project's Java floor is being raised at the same time.
+  - package-ecosystem: maven
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: chore
+      include: scope
+    ignore:
+      - dependency-name: com.fasterxml.jackson.core:jackson-databind
+        update-types: ["version-update:semver-major"]
+      - dependency-name: org.junit.jupiter:junit-jupiter
+        update-types: ["version-update:semver-major"]
+      - dependency-name: org.mockito:mockito-core
+        update-types: ["version-update:semver-major"]
+      - dependency-name: com.squareup.okhttp3:okhttp
+        update-types: ["version-update:semver-major"]
+      - dependency-name: com.squareup.okhttp3:mockwebserver
+        update-types: ["version-update:semver-major"]
+
+  # GitHub Actions
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: chore
+      include: scope

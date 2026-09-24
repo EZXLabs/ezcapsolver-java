@@ -1,0 +1,78 @@
+name: CI
+
+# When pushing the main branch
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# Read-only by default. No job here writes to the repository, and an
+# unspecified block inherits whatever the repository setting happens to be.
+permissions:
+  contents: read
+
+env:
+  MAVEN_ARGS: -B -ntp
+
+jobs:
+  # The full gate: compiles with --release 8, runs the suite, and runs the two
+  # API guards that only make sense on a modern JDK.
+  build:
+    name: Build & Verify (JDK 17)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # japicmp compares against the previously released artifact, and
+          # git-cliff-adjacent tooling reads history. A shallow clone is enough
+          # for the former, but tags are not.
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Verify
+        run: mvn $MAVEN_ARGS clean verify
+
+      # Javadoc is a hard release requirement on Maven Central, and it breaks in
+      # ways the compiler does not catch — javadoc parses source, so anything
+      # Lombok generates is invisible to it unless delombok has run first.
+      - name: Javadoc
+        run: mvn $MAVEN_ARGS javadoc:javadoc
+
+  # The only empirical evidence behind the Java 8 promise. Without this job,
+  # "supports Java 8" is just a number in the POM.
+  #
+  # javac here receives -source 8 -target 8 rather than --release 8, because
+  # --release arrived in JDK 9. That is fine: a JDK 8 compiler links against its
+  # own rt.jar, so the API ceiling is enforced by the toolchain itself.
+  verify-java8:
+    name: Verify on JDK 8
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "8"
+          cache: maven
+
+      # Tests only. animal-sniffer and japicmp are skipped here: this job exists
+      # to prove the code runs on a Java 8 runtime, which the suite does.
+      - name: Test
+        run: mvn $MAVEN_ARGS clean test
+
+  typos:
+    name: Typos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: crate-ci/typos@v1.50.1

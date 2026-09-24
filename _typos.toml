@@ -1,0 +1,72 @@
+# typos checks English spelling in source code and documentation.
+
+
+[files]
+# Files and paths excluded from spell checking.
+extend-exclude = ["LICENSE", "target/"]
+ignore-hidden = true  # Ignore hidden files.
+ignore-vcs = true     # Ignore files excluded by VCS ignore rules.
+ignore-dot = true     # Ignore files excluded by .ignore files.
+
+# Spell-checking behavior.
+[default]
+check-filename = true # Check file names.
+check-file = true     # Check file contents.
+locale = "en"
+binary = false        # Whether to check binary files.
+unicode = true        # Support Unicode identifiers.
+# Regular expressions for ignored content, including inline disable comments.
+extend-ignore-re = [
+    "(?Rm)^.*(#|//)\\s*spellchecker:disable-line$",
+    "(?s)(#|//)\\s*spellchecker:off.*?\\n\\s*(#|//)\\s*spellchecker:on",
+]
+extend-ignore-identifiers-re = []    # Regular expressions for ignored identifiers.
+extend-ignore-words-re = []          # Regular expressions for ignored words.
+
+[default.extend-words]
+# Java and build tooling.
+delombok = "delombok"
+japicmp = "japicmp"
+jacoco = "jacoco"
+javac = "javac"
+javadoc = "javadoc"
+jre = "jre"
+lombok = "lombok"
+maven = "maven"
+mockito = "mockito"
+okhttp = "okhttp"
+okio = "okio"
+slf4j = "slf4j"
+sonatype = "sonatype"
+surefire = "surefire"
+temurin = "temurin"
+
+# Protocols, formats and infrastructure.
+cors = "cors"
+grpc = "grpc"
+gpg = "gpg"
+jwt = "jwt"
+socks = "socks"
+webhook = "webhook"
+
+# Wire vocabulary from the EzCaptchaSolver task catalog. These are field names the
+# service defines, not English words — none of them may be "corrected".
+abck = "abck"
+akamai = "akamai"
+bmsz = "bmsz"
+bpc = "bpc"
+captcha = "captcha"
+cid = "cid"
+datadome = "datadome"
+ddk = "ddk"
+funcaptcha = "funcaptcha"
+hcaptcha = "hcaptcha"
+incapsula = "incapsula"
+jstype = "jstype"
+lso = "lso"  # bm_lso_time, an Akamai SBSD solution field
+perimeterx = "perimeterx"
+proxyless = "proxyless"
+recaptcha = "recaptcha"
+rqdata = "rqdata"
+sbsd = "sbsd"
+turnstile = "turnstile"

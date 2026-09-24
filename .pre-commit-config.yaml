@@ -1,0 +1,43 @@
+fail_fast: false
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: fix-byte-order-marker
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-yaml
+      - id: check-xml
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+
+  - repo: local
+    hooks:
+      - id: typos
+        name: typos
+        description: Check spelling in sources and documentation.
+        entry: bash -c 'typos'
+        language: system
+        pass_filenames: false
+
+      - id: mvn-test
+        name: mvn test
+        description: Compile everything, including the examples, and run the suite.
+        entry: bash -c 'mvn -B -ntp -q test'
+        language: system
+        files: (\.java$|^pom\.xml$)
+        pass_filenames: false
+
+      # Javadoc is a hard Maven Central requirement and breaks in ways javac does
+      # not catch: it parses source, so a {@link} to a Lombok-generated type or to
+      # a class the file never imported fails there and nowhere else. Both have
+      # happened on this project.
+      - id: mvn-javadoc
+        name: mvn javadoc
+        description: Build the javadoc the release needs, over delomboked sources.
+        entry: bash -c 'mvn -B -ntp -q javadoc:javadoc'
+        language: system
+        files: (\.java$|^pom\.xml$)
+        pass_filenames: false

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.burstlinker.ezcapsolver</groupId>
+  <artifactId>ezcapsolver-java</artifactId>
+  <version>0.1.0</version>
+  <packaging>jar</packaging>
+
+  <name>ezcapsolver-java</name>
+  <description>Java SDK for EzCaptchaSolver.</description>
+  <url>https://ezxlabs.com</url>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>EZXLabs</name>
+      <email>admin@ezxlabs.com</email>
+      <organization>EZXLabs</organization>
+      <organizationUrl>https://github.com/EZXLabs</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/EZXLabs/ezcapsolver-java.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/EZXLabs/ezcapsolver-java.git</developerConnection>
+    <url>https://github.com/EZXLabs/ezcapsolver-java</url>
+  </scm>
+
+  <properties>
+    <maven.compiler.release>8</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <okhttp.version>4.12.0</okhttp.version>
+    <jackson.version>2.21.2</jackson.version>
+    <slf4j.version>2.0.17</slf4j.version>
+    <lombok.version>1.18.42</lombok.version>
+    <junit.version>5.14.0</junit.version>
+    <mockito.version>4.11.0</mockito.version>
+
+    <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+    <maven-jar-plugin.version>3.4.1</maven-jar-plugin.version>
+    <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+    <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
+    <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
+    <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
+    <animal-sniffer-maven-plugin.version>1.24</animal-sniffer-maven-plugin.version>
+    <japicmp-maven-plugin.version>0.23.1</japicmp-maven-plugin.version>
+    <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
+
+    <!-- Where delombok writes the real source javadoc needs. See the plugin below. -->
+    <delombok.output>${project.build.directory}/generated-sources/delombok</delombok.output>
+
+    <!--
+      The PREVIOUS released version japicmp compares against — never the version
+      being built, which would compare the artifact with itself and pass
+      unconditionally. Bump this at each release, one step behind the project
+      version. Nothing is released yet, so it currently resolves to nothing and
+      the check no-ops.
+    -->
+    <japicmp.baseline>0.1.0</japicmp.baseline>
+
+    <!--
+      The examples live in the normal source tree so the compiler keeps them
+      honest, but they are documentation, not API. Three plugins have to be told
+      to leave them out — jar, sources jar and javadoc. Miss one and they leak
+      into the release.
+
+      Two plugins deliberately get no exclusion:
+
+      animal-sniffer, because letting it prove the examples also work against the
+      Java 8 API costs nothing and is worth having.
+
+      japicmp, because it compares the packaged jars, and the jar exclusion has
+      already removed the examples from both sides — verified by renaming an
+      example's main method and watching the build stay green with no japicmp
+      exclusion configured at all. A rule that reads as load-bearing but is not
+      is worse than no rule.
+    -->
+    <examples.package>com.burstlinker.ezcapsolver.examples</examples.package>
+    <examples.path>com/burstlinker/ezcapsolver/examples/**</examples.path>
+
+    <!--
+      Internals that are public only because Java 8 has no visibility between
+      package-private and public. Shipped in the jar because they are needed at
+      runtime, but kept out of the javadoc and the compatibility check. Internals
+      the compiler can hide stay package-private in their own package instead.
+    -->
+    <internal.package>com.burstlinker.ezcapsolver.internal</internal.package>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+      <version>${okhttp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>mockwebserver</artifactId>
+      <version>${okhttp.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+          <source combine.self="override">${maven.compiler.release}</source>
+          <target combine.self="override">${maven.compiler.release}</target>
+          <compilerVersion combine.self="override">${maven.compiler.release}</compilerVersion>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
+            </path>
+          </annotationProcessorPaths>
+          <compilerArgs>
+            <arg>-Xlint:all,-options,-processing</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+      </plugin>
+
+      <!-- Exclusion 1 of 3: the examples are compiled, but never packaged. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${maven-jar-plugin.version}</version>
+        <configuration>
+          <excludes>
+            <exclude>${examples.path}</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+
+      <!--
+        Javadoc reads source, not bytecode, so everything Lombok generates is
+        invisible to it — and source that mentions a generated type, such as
+        ClientConfig.ClientConfigBuilder, fails to resolve outright. Delombok
+        writes out the expanded source for javadoc to read instead.
+
+        addOutputDirectory is false on purpose: adding it would compile the
+        expanded copy alongside the originals and duplicate every class.
+
+        Bound to generate-sources so that a bare `mvn javadoc:javadoc` works —
+        that goal forks the generate-sources phase.
+      -->
+      <plugin>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok-maven-plugin</artifactId>
+        <version>${lombok-maven-plugin.version}</version>
+        <dependencies>
+          <!-- The plugin ships an old Lombok; use the one the project compiles with. -->
+          <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>delombok</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>delombok</goal>
+            </goals>
+            <configuration>
+              <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+              <outputDirectory>${delombok.output}</outputDirectory>
+              <addOutputDirectory>false</addOutputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven-javadoc-plugin.version}</version>
+        <configuration>
+          <sourcepath>${delombok.output}</sourcepath>
+          <source>${maven.compiler.release}</source>
+          <doclint>all,-missing</doclint>
+          <quiet>true</quiet>
+          <!--
+            Exclusion 2 of 3. Trailing .* also covers the per-vendor subpackages.
+
+            The internal package is excluded for a different reason: its classes are
+            public only because they are called from more than one package, and
+            publishing them next to EzCapSolverClient would read as API.
+          -->
+          <excludePackageNames>${examples.package}:${examples.package}.*:${internal.package}</excludePackageNames>
+        </configuration>
+      </plugin>
+
+      <!--
+        A second line of defence behind `release=8`. It is not redundant: an
+        external settings.xml can silently override the compiler parameters and
+        take the API ceiling with them, which has happened on this project.
+        animal-sniffer checks the bytecode that was actually produced.
+      -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>animal-sniffer-maven-plugin</artifactId>
+        <version>${animal-sniffer-maven-plugin.version}</version>
+        <configuration>
+          <signature>
+            <groupId>org.codehaus.mojo.signature</groupId>
+            <artifactId>java18</artifactId>
+            <version>1.0</version>
+          </signature>
+        </configuration>
+        <executions>
+          <execution>
+            <id>check-java8-api</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!--
+        Binary compatibility against the previous release. Until there is one,
+        ignoreMissingOldVersion makes this a no-op rather than a failure.
+
+        Only public API is compared. Transport is package-private and therefore
+        invisible to it; everything in the internal package is public only
+        because more than one package calls it, carries no compatibility
+        promise, and is excluded wholesale.
+      -->
+      <plugin>
+        <groupId>com.github.siom79.japicmp</groupId>
+        <artifactId>japicmp-maven-plugin</artifactId>
+        <version>${japicmp-maven-plugin.version}</version>
+        <configuration>
+          <oldVersion>
+            <dependency>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>${project.artifactId}</artifactId>
+              <version>${japicmp.baseline}</version>
+              <type>jar</type>
+            </dependency>
+          </oldVersion>
+          <!--
+            Stated explicitly. Left to its default, a bare `mvn japicmp:cmp`
+            outside the lifecycle picks up the project's dependencies as the
+            artifact to compare and reports every Jackson and OkHttp class as
+            new, which looks like a pass and checks nothing.
+          -->
+          <newVersion>
+            <file>
+              <path>${project.build.directory}/${project.build.finalName}.jar</path>
+            </file>
+          </newVersion>
+          <parameter>
+            <onlyModified>true</onlyModified>
+            <accessModifier>public</accessModifier>
+            <breakBuildOnBinaryIncompatibleModifications>true</breakBuildOnBinaryIncompatibleModifications>
+            <breakBuildOnSourceIncompatibleModifications>true</breakBuildOnSourceIncompatibleModifications>
+            <ignoreMissingOldVersion>true</ignoreMissingOldVersion>
+            <!--
+              Lombok is a provided dependency, so japicmp puts it on the
+              classpath and then cannot resolve it: the jar hides lombok.core.*
+              inside .SCL.lombok resources rather than real class files, and
+              what it does expose reaches for Ant and javac internals that are
+              not there either. Matching those by regex turns into whack-a-mole
+              on every Lombok upgrade.
+
+              Safe here because no Lombok type reaches the public API — the
+              annotations are source-retention. Every type this SDK does expose
+              comes from java.*, Jackson, OkHttp or slf4j, all of which resolve.
+            -->
+            <ignoreMissingClasses>true</ignoreMissingClasses>
+            <!--
+              Compare this SDK's own classes and nothing else. Without this,
+              japicmp walks the whole classpath and reports every Jackson and
+              OkHttp class as removed, which is both wrong and unreadable.
+            -->
+            <includes>
+              <include>com.burstlinker.ezcapsolver.*</include>
+            </includes>
+            <excludes>
+              <exclude>${internal.package}.*</exclude>
+            </excludes>
+          </parameter>
+          <skipXmlReport>true</skipXmlReport>
+        </configuration>
+        <executions>
+          <execution>
+            <id>check-api-compatibility</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>cmp</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <!--
+      Everything Maven Central requires on top of the jar: a sources jar, a
+      javadoc jar, and a detached GPG signature for each. Kept out of the
+      default build because signing needs a key that only the release job has.
+    -->
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>${maven-source-plugin.version}</version>
+            <configuration>
+              <!-- Exclusion 3 of 3: keep them out of the sources jar too. -->
+              <excludes>
+                <exclude>${examples.path}</exclude>
+              </excludes>
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${maven-javadoc-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>${maven-gpg-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <configuration>
+                  <!-- No TTY on a runner, so the passphrase arrives by environment. -->
+                  <gpgArguments>
+                    <arg>--pinentry-mode</arg>
+                    <arg>loopback</arg>
+                  </gpgArguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.sonatype.central</groupId>
+            <artifactId>central-publishing-maven-plugin</artifactId>
+            <version>${central-publishing-maven-plugin.version}</version>
+            <extensions>true</extensions>
+            <configuration>
+              <!-- Matches the server-id the release workflow writes into settings.xml. -->
+              <publishingServerId>central</publishingServerId>
+              <autoPublish>true</autoPublish>
+              <waitUntil>published</waitUntil>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
