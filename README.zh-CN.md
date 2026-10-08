@@ -122,7 +122,7 @@ implementation("com.burstlinker.ezcapsolver:ezcapsolver-java:0.1.0")
 
 ## 🚀 快速开始
 
-配置里没有显式提供 key 时,客户端会从环境变量 `EZCAPTCHA_API_KEY` 读取。
+将 `YOUR_API_KEY` 替换为你的密钥。配置里没有显式提供 key 时,客户端会从环境变量 `EZCAPSOLVER_API_KEY` 读取。
 
 ```java
 import com.burstlinker.ezcapsolver.EzCapSolverClient;
@@ -130,7 +130,7 @@ import com.burstlinker.ezcapsolver.model.Solved;
 import com.burstlinker.ezcapsolver.model.solution.ReCaptchaSolution;
 import com.burstlinker.ezcapsolver.model.task.ReCaptchaV2TaskParams;
 
-EzCapSolverClient client = new EzCapSolverClient();
+EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
 ReCaptchaV2TaskParams params = ReCaptchaV2TaskParams.builder()
         .websiteUrl("https://example.com")
@@ -595,17 +595,17 @@ Solved<JsonNode> sync   = client.syncSolveRaw("SomeBrandNewTaskType", params);
 由简到繁:
 
 ```java
-new EzCapSolverClient();                       // 全默认,key 从 EZCAPTCHA_API_KEY 读
-new EzCapSolverClient("your-key");             // 全默认,key 在这里给
+new EzCapSolverClient();                       // 全默认,key 从 EZCAPSOLVER_API_KEY 读
+new EzCapSolverClient("YOUR_API_KEY");         // 全默认,key 在这里给
 new EzCapSolverClient(someClientConfig);       // 用一份已经建好的配置
 EzCapSolverClient.builder()./* ... */.build(); // 就地配置
 ```
 
-`EzCapSolverClient.of("your-key")` 和 `EzCapSolverClient.of(someClientConfig)` 就是上面那两个构造的另一个名字。它们殊途同归,在调用处哪种读起来顺就用哪种。
+`EzCapSolverClient.of("YOUR_API_KEY")` 和 `EzCapSolverClient.of(someClientConfig)` 就是上面那两个构造的另一个名字。它们殊途同归,在调用处哪种读起来顺就用哪种。
 
 ```java
 EzCapSolverClient client = EzCapSolverClient.builder()
-        .clientKey("your-key")
+        .clientKey("YOUR_API_KEY")
         .timeout(Duration.ofSeconds(30))
         .syncTimeout(Duration.ofSeconds(240))
         .pollInterval(Duration.ofSeconds(3))
@@ -616,7 +616,7 @@ EzCapSolverClient client = EzCapSolverClient.builder()
 
 | 配置项 | 默认值 | 说明 |
 | --- | --- | --- |
-| `clientKey` | `$EZCAPTCHA_API_KEY` | 必需,这里不设就从环境变量读 |
+| `clientKey` | `$EZCAPSOLVER_API_KEY` | 必需,这里不设就从环境变量读 |
 | `timeout` | 30s | 异步端点和余额查询 |
 | `syncTimeout` | 240s | 仅 `/createSyncTask` |
 | `pollInterval` | 3s | 两次查询结果之间的等待 |
@@ -701,11 +701,9 @@ Logger 按类命名,所以 `com.burstlinker.ezcapsolver` 就能框住整个 SDK�
 
 ## 🧪 可运行示例
 
-一种任务类型一个文件,见 [`examples`](./examples) —— 索引在那里,代码在 `com.burstlinker.ezcapsolver.examples` 包下。
+一种任务类型一个文件,见 [`examples`](./examples) —— 索引在那里,代码在 `com.burstlinker.ezcapsolver.examples` 包下。先把示例中的占位符 `YOUR_API_KEY` 替换为你的密钥,然后:
 
 ```bash
-export EZCAPTCHA_API_KEY=your-key
-
 mvn -q compile
 mvn -q dependency:build-classpath -Dmdep.outputFile=target/cp.txt
 

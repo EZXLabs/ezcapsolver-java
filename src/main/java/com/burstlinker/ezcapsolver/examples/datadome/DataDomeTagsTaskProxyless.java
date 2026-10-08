@@ -28,7 +28,7 @@ import java.util.Map;
 public class DataDomeTagsTaskProxyless {
 
     public static void main(String[] args) {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         Map<String, Object> fields = new LinkedHashMap<String, Object>();
         fields.put("tags_url", "https://example.com/js/tags.js");

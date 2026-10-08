@@ -15,7 +15,7 @@ import com.burstlinker.ezcapsolver.model.task.CloudFlareTurnstileTaskParams;
 public class CloudFlareTurnstileTask {
 
     public static void main(String[] args) {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         CloudFlareTurnstileTaskParams params =
                 CloudFlareTurnstileTaskParams.builder()

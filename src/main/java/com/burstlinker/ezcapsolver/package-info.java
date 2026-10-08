@@ -6,7 +6,7 @@
  * com.burstlinker.ezcapsolver.model.task}:
  *
  * <pre>{@code
- * EzCapSolverClient client = new EzCapSolverClient();   // key from EZCAPTCHA_API_KEY
+ * EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
  *
  * HCaptchaTaskParams params = HCaptchaTaskParams.builder()
  *         .websiteUrl("https://example.com")

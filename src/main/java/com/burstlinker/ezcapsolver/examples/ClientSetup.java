@@ -17,12 +17,12 @@ public class ClientSetup {
     public static void main(String[] args) {
         minimal();
         explicit();
-        System.out.println(EzCapSolverClient.builder().build().config());
+        System.out.println(new EzCapSolverClient("YOUR_API_KEY").config());
     }
 
-    /** The whole configuration, when the key is in {@code EZCAPTCHA_API_KEY}. */
+    /** The whole configuration: just the key. */
     private static void minimal() {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         BigDecimal balance = client.getBalance();
         System.out.println("Balance: " + balance);
@@ -31,8 +31,8 @@ public class ClientSetup {
     private static void explicit() {
         EzCapSolverClient client =
                 EzCapSolverClient.builder()
-                        // Falls back to the EZCAPTCHA_API_KEY environment variable.
-                        .clientKey(System.getenv("EZCAPTCHA_API_KEY"))
+                        // Falls back to the EZCAPSOLVER_API_KEY environment variable.
+                        .clientKey("YOUR_API_KEY")
 
                         // Two separate budgets, on purpose.
                         //

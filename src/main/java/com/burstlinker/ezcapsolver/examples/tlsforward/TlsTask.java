@@ -24,7 +24,7 @@ import java.util.Map;
 public class TlsTask {
 
     public static void main(String[] args) {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         Map<String, Object> headers = new LinkedHashMap<String, Object>();
         headers.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");

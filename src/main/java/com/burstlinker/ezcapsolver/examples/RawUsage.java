@@ -32,7 +32,7 @@ public class RawUsage {
      * {@code JsonNode}, so a new type is usable the day it ships — no SDK release, no waiting.
      */
     private static void unmodelledTaskType() {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         Map<String, Object> params = new LinkedHashMap<String, Object>();
         params.put("websiteURL", "https://example.com");
@@ -52,7 +52,7 @@ public class RawUsage {
      * cannot quietly override {@code websiteUrl}.
      */
     private static void unmodelledParameter() {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         HCaptchaTaskParams params =
                 HCaptchaTaskParams.builder()
@@ -77,7 +77,7 @@ public class RawUsage {
      * riding out a throttled query; prefer it unless you need the task ID to outlive the call.
      */
     private static void pollByHand() {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         HCaptchaTaskParams params =
                 HCaptchaTaskParams.builder()

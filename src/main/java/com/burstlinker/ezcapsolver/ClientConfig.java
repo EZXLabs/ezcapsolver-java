@@ -15,7 +15,7 @@ import okhttp3.OkHttpClient;
  *
  * <pre>{@code
  * ClientConfig config = ClientConfig.builder()
- *         .clientKey("...")                       // falls back to EZCAPTCHA_API_KEY
+ *         .clientKey("...")                       // falls back to EZCAPSOLVER_API_KEY
  *         .timeout(Duration.ofSeconds(30))
  *         .syncTimeout(Duration.ofSeconds(240))
  *         .pollInterval(Duration.ofSeconds(3))
@@ -36,7 +36,7 @@ public final class ClientConfig {
     public static final String DEFAULT_SYNC_BASE_URL = "https://sync.ez-captcha.com";
 
     /** Read when no client key is supplied explicitly. */
-    public static final String DEFAULT_CLIENT_KEY_ENV = "EZCAPTCHA_API_KEY";
+    public static final String DEFAULT_CLIENT_KEY_ENV = "EZCAPSOLVER_API_KEY";
 
     /** Bounds one call to an asynchronous endpoint or the balance query. */
     public static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(30);

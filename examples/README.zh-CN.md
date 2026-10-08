@@ -31,8 +31,6 @@ examples/
 ## 怎么跑
 
 ```bash
-export EZCAPTCHA_API_KEY=your-key
-
 # 只需一次:编译并导出依赖 classpath。
 mvn -q compile
 mvn -q dependency:build-classpath -Dmdep.outputFile=target/cp.txt
@@ -44,7 +42,7 @@ java -cp "target/classes:$(cat target/cp.txt)" \
 
 **在仓库根目录运行** —— 分类类示例会从 `examples/fixtures/` 读图片。
 
-没有任何示例硬编码密钥。需要代理的读 `EZCAPTCHA_PROXY`;另有几个从环境变量读取参数,而不是编造一个看着像真的假值。
+所有示例都使用占位密钥 `YOUR_API_KEY`,运行前替换成你自己的密钥。需要代理的读 `EZCAPTCHA_PROXY`;另有几个从环境变量读取参数,而不是编造一个看着像真的假值。
 
 ## SDK 本身
 

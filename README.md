@@ -122,7 +122,7 @@ implementation("com.burstlinker.ezcapsolver:ezcapsolver-java:0.1.0")
 
 ## 🚀 Quick Start
 
-The client reads `EZCAPTCHA_API_KEY` from the environment when the configuration carries no explicit key.
+Replace `YOUR_API_KEY` with your client key. When the configuration carries no explicit key, the client reads `EZCAPSOLVER_API_KEY` from the environment.
 
 ```java
 import com.burstlinker.ezcapsolver.EzCapSolverClient;
@@ -130,7 +130,7 @@ import com.burstlinker.ezcapsolver.model.Solved;
 import com.burstlinker.ezcapsolver.model.solution.ReCaptchaSolution;
 import com.burstlinker.ezcapsolver.model.task.ReCaptchaV2TaskParams;
 
-EzCapSolverClient client = new EzCapSolverClient();
+EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
 ReCaptchaV2TaskParams params = ReCaptchaV2TaskParams.builder()
         .websiteUrl("https://example.com")
@@ -595,17 +595,17 @@ Solved<JsonNode> sync   = client.syncSolveRaw("SomeBrandNewTaskType", params);
 Shortest first:
 
 ```java
-new EzCapSolverClient();                       // defaults, key from EZCAPTCHA_API_KEY
-new EzCapSolverClient("your-key");             // defaults, key given here
+new EzCapSolverClient();                       // defaults, key from EZCAPSOLVER_API_KEY
+new EzCapSolverClient("YOUR_API_KEY");         // defaults, key given here
 new EzCapSolverClient(someClientConfig);       // a configuration you already built
 EzCapSolverClient.builder()./* ... */.build(); // configured inline
 ```
 
-`EzCapSolverClient.of("your-key")` and `EzCapSolverClient.of(someClientConfig)` are the same two constructors under another name. They all end up in the same place; pick whichever reads best at the call site.
+`EzCapSolverClient.of("YOUR_API_KEY")` and `EzCapSolverClient.of(someClientConfig)` are the same two constructors under another name. They all end up in the same place; pick whichever reads best at the call site.
 
 ```java
 EzCapSolverClient client = EzCapSolverClient.builder()
-        .clientKey("your-key")
+        .clientKey("YOUR_API_KEY")
         .timeout(Duration.ofSeconds(30))
         .syncTimeout(Duration.ofSeconds(240))
         .pollInterval(Duration.ofSeconds(3))
@@ -616,7 +616,7 @@ EzCapSolverClient client = EzCapSolverClient.builder()
 
 | Option | Default | Notes |
 | --- | --- | --- |
-| `clientKey` | `$EZCAPTCHA_API_KEY` | Required, from the environment if not set here |
+| `clientKey` | `$EZCAPSOLVER_API_KEY` | Required, from the environment if not set here |
 | `timeout` | 30s | Asynchronous endpoints and the balance query |
 | `syncTimeout` | 240s | `/createSyncTask` only |
 | `pollInterval` | 3s | Wait between result queries |
@@ -701,11 +701,9 @@ Loggers are named after their classes, so `com.burstlinker.ezcapsolver` scopes t
 
 ## 🧪 Runnable Examples
 
-One file per task type, in [`examples`](./examples) — indexed there, with the code under `com.burstlinker.ezcapsolver.examples`.
+One file per task type, in [`examples`](./examples) — indexed there, with the code under `com.burstlinker.ezcapsolver.examples`. Replace the `YOUR_API_KEY` placeholder in the examples with your client key, then:
 
 ```bash
-export EZCAPTCHA_API_KEY=your-key
-
 mvn -q compile
 mvn -q dependency:build-classpath -Dmdep.outputFile=target/cp.txt
 

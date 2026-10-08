@@ -31,8 +31,6 @@ It also means the build has to keep them out of the release, which three plugins
 ## Running One
 
 ```bash
-export EZCAPTCHA_API_KEY=your-key
-
 # Once: compile everything and write out the dependency classpath.
 mvn -q compile
 mvn -q dependency:build-classpath -Dmdep.outputFile=target/cp.txt
@@ -44,7 +42,7 @@ java -cp "target/classes:$(cat target/cp.txt)" \
 
 Run them **from the repository root** — the classification examples read their images from `examples/fixtures/`.
 
-No example hardcodes a key. The ones that need a proxy read `EZCAPTCHA_PROXY`; a few read other values from the environment rather than inventing plausible-looking fakes.
+Every example passes the placeholder key `YOUR_API_KEY`; replace it with your own key before running. The ones that need a proxy read `EZCAPTCHA_PROXY`; a few read other values from the environment rather than inventing plausible-looking fakes.
 
 ## The SDK Itself
 

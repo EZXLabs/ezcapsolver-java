@@ -26,7 +26,7 @@ public class AkamaiWEBTaskProxyless {
     private static final int ROUNDS = 3;
 
     public static void main(String[] args) {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         String encodeData = "";
 

@@ -28,7 +28,7 @@ import java.util.Base64;
 public class DataDomeTaskProxyless {
 
     public static void main(String[] args) {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         String challengeHtml = "<html>...the intercepted challenge page...</html>";
 

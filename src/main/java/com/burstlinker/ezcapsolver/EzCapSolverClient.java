@@ -19,11 +19,11 @@ import java.time.Duration;
  * methods per task type.
  *
  * <pre>{@code
- * // Defaults, with the key read from EZCAPTCHA_API_KEY
- * EzCapSolverClient client = new EzCapSolverClient();
+ * // Defaults, with the key given here
+ * EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
  *
  * // Or configured
- * EzCapSolverClient client = EzCapSolverClient.builder().clientKey("...").build();
+ * EzCapSolverClient client = EzCapSolverClient.builder().clientKey("YOUR_API_KEY").build();
  *
  * HCaptchaTaskParams params = HCaptchaTaskParams.builder()
  *         .websiteUrl("https://example.com")
@@ -680,7 +680,7 @@ public final class EzCapSolverClient {
 
         private Builder() {}
 
-        /** The API key. Falls back to {@code EZCAPTCHA_API_KEY} when left unset. */
+        /** The API key. Falls back to {@code EZCAPSOLVER_API_KEY} when left unset. */
         public Builder clientKey(String clientKey) {
             delegate.clientKey(clientKey);
             return this;

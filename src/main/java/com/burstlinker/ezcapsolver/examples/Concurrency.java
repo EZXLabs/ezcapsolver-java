@@ -33,7 +33,7 @@ public class Concurrency {
     private static final int CONCURRENCY = 3;
 
     public static void main(String[] args) throws Exception {
-        final EzCapSolverClient client = EzCapSolverClient.builder().build();
+        final EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         ExecutorService pool = Executors.newFixedThreadPool(CONCURRENCY);
         List<Future<Solved<HCaptchaSolution>>> futures =

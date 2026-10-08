@@ -25,7 +25,7 @@ import java.util.Map;
 public class CloudFlare5STask {
 
     public static void main(String[] args) {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         // Send rqData as an object, never a pre-encoded string: the service stringifies it
         // itself when forwarding to the worker, so encoding it here produces double encoding.

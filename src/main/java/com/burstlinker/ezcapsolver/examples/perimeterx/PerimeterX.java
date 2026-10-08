@@ -16,7 +16,7 @@ import com.burstlinker.ezcapsolver.model.task.PerimeterXTaskParams;
 public class PerimeterX {
 
     public static void main(String[] args) {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         PerimeterXTaskParams params =
                 PerimeterXTaskParams.builder()

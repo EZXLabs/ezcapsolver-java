@@ -22,7 +22,7 @@ import com.burstlinker.ezcapsolver.model.task.FunCaptchaTaskParams;
 public class FuncaptchaTaskProxyless {
 
     public static void main(String[] args) {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         FunCaptchaTaskParams params =
                 FunCaptchaTaskParams.builder()

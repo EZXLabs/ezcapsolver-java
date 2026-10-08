@@ -24,7 +24,7 @@ import java.util.Base64;
 public class AkamaiSBSDTaskProxyless {
 
     public static void main(String[] args) throws IOException {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         // The script the page loaded, fetched and base64-encoded by you.
         byte[] script = Files.readAllBytes(Paths.get("sbsd.js"));

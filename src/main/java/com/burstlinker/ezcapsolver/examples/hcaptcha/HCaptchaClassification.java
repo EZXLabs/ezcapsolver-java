@@ -31,7 +31,7 @@ import java.util.Base64;
 public class HCaptchaClassification {
 
     public static void main(String[] args) throws IOException {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         String image = encode("examples/fixtures/crosswalks1x1.jpg");
 

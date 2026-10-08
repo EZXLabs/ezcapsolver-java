@@ -23,7 +23,7 @@ import com.burstlinker.ezcapsolver.model.task.HCaptchaTaskParams;
 public class LoggingAndErrors {
 
     public static void main(String[] args) {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         HCaptchaTaskParams params =
                 HCaptchaTaskParams.builder()

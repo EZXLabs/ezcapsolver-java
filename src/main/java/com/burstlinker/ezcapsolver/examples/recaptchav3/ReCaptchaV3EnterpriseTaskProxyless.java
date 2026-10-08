@@ -18,7 +18,7 @@ import com.burstlinker.ezcapsolver.model.task.ReCaptchaV3TaskParams;
 public class ReCaptchaV3EnterpriseTaskProxyless {
 
     public static void main(String[] args) {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         ReCaptchaV3TaskParams params =
                 ReCaptchaV3TaskParams.builder()

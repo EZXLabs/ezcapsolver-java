@@ -18,7 +18,7 @@ import com.burstlinker.ezcapsolver.model.task.IncapsulaTaskParams;
 public class IncapsulaTaskProxyless {
 
     public static void main(String[] args) {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         IncapsulaTaskParams params =
                 IncapsulaTaskParams.builder()

@@ -28,7 +28,7 @@ import java.util.Base64;
 public class FunCaptchaClassification {
 
     public static void main(String[] args) throws IOException {
-        EzCapSolverClient client = EzCapSolverClient.builder().build();
+        EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
         byte[] image = Files.readAllBytes(Paths.get("examples/fixtures/crosswalks1x1.jpg"));
 
