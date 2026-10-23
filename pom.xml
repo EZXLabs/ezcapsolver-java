@@ -53,7 +53,7 @@
     <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
     <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
     <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
-    <animal-sniffer-maven-plugin.version>1.24</animal-sniffer-maven-plugin.version>
+    <animal-sniffer-maven-plugin.version>1.28</animal-sniffer-maven-plugin.version>
     <japicmp-maven-plugin.version>0.23.1</japicmp-maven-plugin.version>
     <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
 
