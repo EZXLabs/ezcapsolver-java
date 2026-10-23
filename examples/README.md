@@ -6,10 +6,10 @@ One runnable file per task type, named after the wire task type so it lines up w
 
 ## Where They Live
 
-The example **code** sits in the normal source tree, under `com.burstlinker.ezcapsolver.examples`:
+The example **code** sits in the normal source tree, under `com.ezxlabs.ezcapsolver.examples`:
 
 ```
-src/main/java/com/burstlinker/ezcapsolver/examples/
+src/main/java/com/ezxlabs/ezcapsolver/examples/
 ├── ClientSetup.java · Concurrency.java · RawUsage.java · LoggingAndErrors.java
 ├── akamai/ · cloudflare/ · datadome/ · funcaptcha/ · hcaptcha/
 ├── incapsula/ · perimeterx/ · recaptchav2/ · recaptchav3/ · tlsforward/
@@ -24,7 +24,7 @@ It also means the build has to keep them out of the release, which three plugins
 
 > Because the examples are excluded from the jar, run them from `target/classes` rather than from the artifact. The commands below already do.
 
-> **Every run creates a real task and is billed, whether or not the worker succeeds.** The only exception is [`ClientSetup.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/ClientSetup.java), which calls `getBalance` — the one free endpoint.
+> **Every run creates a real task and is billed, whether or not the worker succeeds.** The only exception is [`ClientSetup.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/ClientSetup.java), which calls `getBalance` — the one free endpoint.
 >
 > The reCAPTCHA v2 and hCaptcha examples point at the vendors' own demo pages and work as written. The rest carry placeholder site keys for you to fill in.
 
@@ -37,7 +37,7 @@ mvn -q dependency:build-classpath -Dmdep.outputFile=target/cp.txt
 
 # Then any example, by its fully qualified name.
 java -cp "target/classes:$(cat target/cp.txt)" \
-     com.burstlinker.ezcapsolver.examples.hcaptcha.HCaptcha
+     com.ezxlabs.ezcapsolver.examples.hcaptcha.HCaptcha
 ```
 
 Run them **from the repository root** — the classification examples read their images from `examples/fixtures/`.
@@ -48,10 +48,10 @@ Every example passes the placeholder key `YOUR_API_KEY`; replace it with your ow
 
 | Example | What it covers |
 | --- | --- |
-| [`ClientSetup.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/ClientSetup.java) | Every option, and why the two timeout budgets are separate |
-| [`Concurrency.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/Concurrency.java) | Sharing one client across threads, with a concurrency cap |
-| [`RawUsage.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/RawUsage.java) | Polling by hand, and reaching a task type the SDK does not model |
-| [`LoggingAndErrors.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/LoggingAndErrors.java) | Injecting a logger, and telling the failure layers apart |
+| [`ClientSetup.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/ClientSetup.java) | Every option, and why the two timeout budgets are separate |
+| [`Concurrency.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/Concurrency.java) | Sharing one client across threads, with a concurrency cap |
+| [`RawUsage.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/RawUsage.java) | Polling by hand, and reaching a task type the SDK does not model |
+| [`LoggingAndErrors.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/LoggingAndErrors.java) | Injecting a logger, and telling the failure layers apart |
 
 ## reCAPTCHA v2
 
@@ -59,12 +59,12 @@ Every example passes the placeholder key `YOUR_API_KEY`; replace it with your ow
 
 | Example | Task type |
 | --- | --- |
-| [`recaptchav2/ReCaptchaV2TaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav2/ReCaptchaV2TaskProxyless.java) | `ReCaptchaV2TaskProxyless` |
-| [`recaptchav2/ReCaptchaV2TaskProxylessS9.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav2/ReCaptchaV2TaskProxylessS9.java) | `ReCaptchaV2TaskProxylessS9` |
-| [`recaptchav2/ReCaptchaV2STaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav2/ReCaptchaV2STaskProxyless.java) | `ReCaptchaV2STaskProxyless` |
-| [`recaptchav2/ReCaptchaV2EnterpriseTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav2/ReCaptchaV2EnterpriseTaskProxyless.java) | `ReCaptchaV2EnterpriseTaskProxyless` |
-| [`recaptchav2/ReCaptchaV2SEnterpriseTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav2/ReCaptchaV2SEnterpriseTaskProxyless.java) | `ReCaptchaV2SEnterpriseTaskProxyless` |
-| [`recaptchav2/ReCaptchaV2Classification.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav2/ReCaptchaV2Classification.java) | `ReCaptchaV2Classification` |
+| [`recaptchav2/ReCaptchaV2TaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav2/ReCaptchaV2TaskProxyless.java) | `ReCaptchaV2TaskProxyless` |
+| [`recaptchav2/ReCaptchaV2TaskProxylessS9.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav2/ReCaptchaV2TaskProxylessS9.java) | `ReCaptchaV2TaskProxylessS9` |
+| [`recaptchav2/ReCaptchaV2STaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav2/ReCaptchaV2STaskProxyless.java) | `ReCaptchaV2STaskProxyless` |
+| [`recaptchav2/ReCaptchaV2EnterpriseTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav2/ReCaptchaV2EnterpriseTaskProxyless.java) | `ReCaptchaV2EnterpriseTaskProxyless` |
+| [`recaptchav2/ReCaptchaV2SEnterpriseTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav2/ReCaptchaV2SEnterpriseTaskProxyless.java) | `ReCaptchaV2SEnterpriseTaskProxyless` |
+| [`recaptchav2/ReCaptchaV2Classification.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav2/ReCaptchaV2Classification.java) | `ReCaptchaV2Classification` |
 
 ## reCAPTCHA v3
 
@@ -72,10 +72,10 @@ Every example passes the placeholder key `YOUR_API_KEY`; replace it with your ow
 
 | Example | Task type |
 | --- | --- |
-| [`recaptchav3/ReCaptchaV3TaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav3/ReCaptchaV3TaskProxyless.java) | `ReCaptchaV3TaskProxyless` |
-| [`recaptchav3/ReCaptchaV3TaskProxylessS9.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav3/ReCaptchaV3TaskProxylessS9.java) | `ReCaptchaV3TaskProxylessS9` |
-| [`recaptchav3/ReCaptchaV3EnterpriseTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav3/ReCaptchaV3EnterpriseTaskProxyless.java) | `ReCaptchaV3EnterpriseTaskProxyless` |
-| [`recaptchav3/ReCaptchaV3EnterpriseTaskProxylessS9.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav3/ReCaptchaV3EnterpriseTaskProxylessS9.java) | `ReCaptchaV3EnterpriseTaskProxylessS9` |
+| [`recaptchav3/ReCaptchaV3TaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav3/ReCaptchaV3TaskProxyless.java) | `ReCaptchaV3TaskProxyless` |
+| [`recaptchav3/ReCaptchaV3TaskProxylessS9.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav3/ReCaptchaV3TaskProxylessS9.java) | `ReCaptchaV3TaskProxylessS9` |
+| [`recaptchav3/ReCaptchaV3EnterpriseTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav3/ReCaptchaV3EnterpriseTaskProxyless.java) | `ReCaptchaV3EnterpriseTaskProxyless` |
+| [`recaptchav3/ReCaptchaV3EnterpriseTaskProxylessS9.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav3/ReCaptchaV3EnterpriseTaskProxylessS9.java) | `ReCaptchaV3EnterpriseTaskProxylessS9` |
 
 ## FunCaptcha / Arkose Labs
 
@@ -83,8 +83,8 @@ Every example passes the placeholder key `YOUR_API_KEY`; replace it with your ow
 
 | Example | Task type |
 | --- | --- |
-| [`funcaptcha/FuncaptchaTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/funcaptcha/FuncaptchaTaskProxyless.java) | `FuncaptchaTaskProxyless` |
-| [`funcaptcha/FunCaptchaClassification.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/funcaptcha/FunCaptchaClassification.java) | `FunCaptchaClassification` |
+| [`funcaptcha/FuncaptchaTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/funcaptcha/FuncaptchaTaskProxyless.java) | `FuncaptchaTaskProxyless` |
+| [`funcaptcha/FunCaptchaClassification.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/funcaptcha/FunCaptchaClassification.java) | `FunCaptchaClassification` |
 
 ## hCaptcha
 
@@ -92,37 +92,37 @@ Every example passes the placeholder key `YOUR_API_KEY`; replace it with your ow
 
 | Example | Task type |
 | --- | --- |
-| [`hcaptcha/HCaptcha.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/hcaptcha/HCaptcha.java) | `HCaptcha` |
-| [`hcaptcha/HCaptchaClassification.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/hcaptcha/HCaptchaClassification.java) | `HCaptchaClassification` |
+| [`hcaptcha/HCaptcha.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/hcaptcha/HCaptcha.java) | `HCaptcha` |
+| [`hcaptcha/HCaptchaClassification.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/hcaptcha/HCaptchaClassification.java) | `HCaptchaClassification` |
 
 ## Cloudflare
 
 | Example | Task type |
 | --- | --- |
-| [`cloudflare/CloudFlare5STask.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/cloudflare/CloudFlare5STask.java) | `CloudFlare5STask` |
-| [`cloudflare/CloudFlareTurnstileTask.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/cloudflare/CloudFlareTurnstileTask.java) | `CloudFlareTurnstileTask` |
+| [`cloudflare/CloudFlare5STask.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/cloudflare/CloudFlare5STask.java) | `CloudFlare5STask` |
+| [`cloudflare/CloudFlareTurnstileTask.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/cloudflare/CloudFlareTurnstileTask.java) | `CloudFlareTurnstileTask` |
 
 ## Akamai
 
 | Example | Task type |
 | --- | --- |
-| [`akamai/AkamaiWEBTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/akamai/AkamaiWEBTaskProxyless.java) | `AkamaiWEBTaskProxyless` |
-| [`akamai/AkamaiSBSDTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/akamai/AkamaiSBSDTaskProxyless.java) | `AkamaiSBSDTaskProxyless` |
+| [`akamai/AkamaiWEBTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/akamai/AkamaiWEBTaskProxyless.java) | `AkamaiWEBTaskProxyless` |
+| [`akamai/AkamaiSBSDTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/akamai/AkamaiSBSDTaskProxyless.java) | `AkamaiSBSDTaskProxyless` |
 
 ## DataDome
 
 | Example | Task type |
 | --- | --- |
-| [`datadome/DataDomeTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/datadome/DataDomeTaskProxyless.java) | `DataDomeTaskProxyless` |
-| [`datadome/DataDomeTagsTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/datadome/DataDomeTagsTaskProxyless.java) | `DataDomeTagsTaskProxyless` |
+| [`datadome/DataDomeTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/datadome/DataDomeTaskProxyless.java) | `DataDomeTaskProxyless` |
+| [`datadome/DataDomeTagsTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/datadome/DataDomeTagsTaskProxyless.java) | `DataDomeTagsTaskProxyless` |
 
 ## Other Protection Systems
 
 | Example | Task type |
 | --- | --- |
-| [`perimeterx/PerimeterX.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/perimeterx/PerimeterX.java) | `PerimeterX` |
-| [`incapsula/IncapsulaTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/incapsula/IncapsulaTaskProxyless.java) | `IncapsulaTaskProxyless` |
-| [`tlsforward/TlsTask.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/tlsforward/TlsTask.java) | `TlsTask` |
+| [`perimeterx/PerimeterX.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/perimeterx/PerimeterX.java) | `PerimeterX` |
+| [`incapsula/IncapsulaTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/incapsula/IncapsulaTaskProxyless.java) | `IncapsulaTaskProxyless` |
+| [`tlsforward/TlsTask.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/tlsforward/TlsTask.java) | `TlsTask` |
 
 ## Fixtures
 

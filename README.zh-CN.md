@@ -5,8 +5,8 @@
   <h1>EZCaptchaSolver Java SDK</h1>
   <p>
     <a href="https://github.com/EZXLabs/ezcapsolver-java/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/EZXLabs/ezcapsolver-java/actions/workflows/ci.yml/badge.svg"></a>
-    <a href="https://central.sonatype.com/artifact/com.burstlinker.ezcapsolver/ezcapsolver-java"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.burstlinker.ezcapsolver/ezcapsolver-java.svg?logo=apachemaven"></a>
-    <a href="https://javadoc.io/doc/com.burstlinker.ezcapsolver/ezcapsolver-java"><img alt="javadoc" src="https://javadoc.io/badge2/com.burstlinker.ezcapsolver/ezcapsolver-java/javadoc.svg"></a>
+    <a href="https://central.sonatype.com/artifact/com.ezxlabs/ezcapsolver-java"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.ezxlabs/ezcapsolver-java.svg?logo=apachemaven"></a>
+    <a href="https://javadoc.io/doc/com.ezxlabs/ezcapsolver-java"><img alt="javadoc" src="https://javadoc.io/badge2/com.ezxlabs/ezcapsolver-java/javadoc.svg"></a>
     <a href="./LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-blue.svg"></a>
     <a href="https://www.oracle.com/java/"><img alt="Java 8+" src="https://img.shields.io/badge/java-8%2B-orange.svg?logo=openjdk&logoColor=white"></a>
     <a href="https://ezxlabs.com"><img alt="EZXLabs 官网" src="https://img.shields.io/badge/website-ezxlabs.com-FFDB29?logoColor=black"></a>
@@ -104,7 +104,7 @@ EZCaptchaSolver Java SDK 是 [EZXLabs](https://ezxlabs.com) 维护的开源 Java
 
 ```xml
 <dependency>
-  <groupId>com.burstlinker.ezcapsolver</groupId>
+  <groupId>com.ezxlabs</groupId>
   <artifactId>ezcapsolver-java</artifactId>
   <version>0.1.0</version>
 </dependency>
@@ -113,8 +113,10 @@ EZCaptchaSolver Java SDK 是 [EZXLabs](https://ezxlabs.com) 维护的开源 Java
 **Gradle**
 
 ```kotlin
-implementation("com.burstlinker.ezcapsolver:ezcapsolver-java:0.1.0")
+implementation("com.ezxlabs:ezcapsolver-java:0.1.0")
 ```
+
+Maven 的 `groupId` 为 `com.ezxlabs`，Java 导入包名为 `com.ezxlabs.ezcapsolver`。
 
 ### 环境要求
 
@@ -125,10 +127,10 @@ implementation("com.burstlinker.ezcapsolver:ezcapsolver-java:0.1.0")
 将 `YOUR_API_KEY` 替换为你的密钥。配置里没有显式提供 key 时,客户端会从环境变量 `EZCAPSOLVER_API_KEY` 读取。
 
 ```java
-import com.burstlinker.ezcapsolver.EzCapSolverClient;
-import com.burstlinker.ezcapsolver.model.Solved;
-import com.burstlinker.ezcapsolver.model.solution.ReCaptchaSolution;
-import com.burstlinker.ezcapsolver.model.task.ReCaptchaV2TaskParams;
+import com.ezxlabs.ezcapsolver.EzCapSolverClient;
+import com.ezxlabs.ezcapsolver.model.Solved;
+import com.ezxlabs.ezcapsolver.model.solution.ReCaptchaSolution;
+import com.ezxlabs.ezcapsolver.model.task.ReCaptchaV2TaskParams;
 
 EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
@@ -697,18 +699,18 @@ SDK 通过 slf4j 输出,并且**只带门面**。在你把一个绑定放上 cla
 
 > Logback 1.3.x 是 Java 8 的版本线,1.4+ 需要 Java 11。
 
-Logger 按类命名,所以 `com.burstlinker.ezcapsolver` 就能框住整个 SDK。它打出来的任何内容都不含你的 API key。
+Logger 按类命名,所以 `com.ezxlabs.ezcapsolver` 就能框住整个 SDK。它打出来的任何内容都不含你的 API key。
 
 ## 🧪 可运行示例
 
-一种任务类型一个文件,见 [`examples`](./examples) —— 索引在那里,代码在 `com.burstlinker.ezcapsolver.examples` 包下。先把示例中的占位符 `YOUR_API_KEY` 替换为你的密钥,然后:
+一种任务类型一个文件,见 [`examples`](./examples) —— 索引在那里,代码在 `com.ezxlabs.ezcapsolver.examples` 包下。先把示例中的占位符 `YOUR_API_KEY` 替换为你的密钥,然后:
 
 ```bash
 mvn -q compile
 mvn -q dependency:build-classpath -Dmdep.outputFile=target/cp.txt
 
 java -cp "target/classes:$(cat target/cp.txt)" \
-     com.burstlinker.ezcapsolver.examples.hcaptcha.HCaptcha
+     com.ezxlabs.ezcapsolver.examples.hcaptcha.HCaptcha
 ```
 
 示例放在源码树里,这样每次构建编译器都会检查它们;同时它们被排除在发布的 jar、sources jar 和 javadoc 之外。

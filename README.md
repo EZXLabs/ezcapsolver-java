@@ -5,8 +5,8 @@
   <h1>EZCaptchaSolver Java SDK</h1>
   <p>
     <a href="https://github.com/EZXLabs/ezcapsolver-java/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/EZXLabs/ezcapsolver-java/actions/workflows/ci.yml/badge.svg"></a>
-    <a href="https://central.sonatype.com/artifact/com.burstlinker.ezcapsolver/ezcapsolver-java"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.burstlinker.ezcapsolver/ezcapsolver-java.svg?logo=apachemaven"></a>
-    <a href="https://javadoc.io/doc/com.burstlinker.ezcapsolver/ezcapsolver-java"><img alt="javadoc" src="https://javadoc.io/badge2/com.burstlinker.ezcapsolver/ezcapsolver-java/javadoc.svg"></a>
+    <a href="https://central.sonatype.com/artifact/com.ezxlabs/ezcapsolver-java"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.ezxlabs/ezcapsolver-java.svg?logo=apachemaven"></a>
+    <a href="https://javadoc.io/doc/com.ezxlabs/ezcapsolver-java"><img alt="javadoc" src="https://javadoc.io/badge2/com.ezxlabs/ezcapsolver-java/javadoc.svg"></a>
     <a href="./LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-blue.svg"></a>
     <a href="https://www.oracle.com/java/"><img alt="Java 8+" src="https://img.shields.io/badge/java-8%2B-orange.svg?logo=openjdk&logoColor=white"></a>
     <a href="https://ezxlabs.com"><img alt="EZXLabs website" src="https://img.shields.io/badge/website-ezxlabs.com-FFDB29?logoColor=black"></a>
@@ -104,7 +104,7 @@ A captcha type can support both forms at once, and almost every type supports th
 
 ```xml
 <dependency>
-  <groupId>com.burstlinker.ezcapsolver</groupId>
+  <groupId>com.ezxlabs</groupId>
   <artifactId>ezcapsolver-java</artifactId>
   <version>0.1.0</version>
 </dependency>
@@ -113,8 +113,10 @@ A captcha type can support both forms at once, and almost every type supports th
 **Gradle**
 
 ```kotlin
-implementation("com.burstlinker.ezcapsolver:ezcapsolver-java:0.1.0")
+implementation("com.ezxlabs:ezcapsolver-java:0.1.0")
 ```
+
+The Maven `groupId` is `com.ezxlabs`; Java imports use `com.ezxlabs.ezcapsolver`.
 
 ### Requirements
 
@@ -125,10 +127,10 @@ implementation("com.burstlinker.ezcapsolver:ezcapsolver-java:0.1.0")
 Replace `YOUR_API_KEY` with your client key. When the configuration carries no explicit key, the client reads `EZCAPSOLVER_API_KEY` from the environment.
 
 ```java
-import com.burstlinker.ezcapsolver.EzCapSolverClient;
-import com.burstlinker.ezcapsolver.model.Solved;
-import com.burstlinker.ezcapsolver.model.solution.ReCaptchaSolution;
-import com.burstlinker.ezcapsolver.model.task.ReCaptchaV2TaskParams;
+import com.ezxlabs.ezcapsolver.EzCapSolverClient;
+import com.ezxlabs.ezcapsolver.model.Solved;
+import com.ezxlabs.ezcapsolver.model.solution.ReCaptchaSolution;
+import com.ezxlabs.ezcapsolver.model.task.ReCaptchaV2TaskParams;
 
 EzCapSolverClient client = new EzCapSolverClient("YOUR_API_KEY");
 
@@ -697,18 +699,18 @@ The SDK logs through slf4j and ships **only the API**. It stays silent until you
 
 > Logback 1.3.x is the Java 8 line; 1.4+ requires Java 11.
 
-Loggers are named after their classes, so `com.burstlinker.ezcapsolver` scopes the whole SDK. Nothing it logs contains your API key.
+Loggers are named after their classes, so `com.ezxlabs.ezcapsolver` scopes the whole SDK. Nothing it logs contains your API key.
 
 ## 🧪 Runnable Examples
 
-One file per task type, in [`examples`](./examples) — indexed there, with the code under `com.burstlinker.ezcapsolver.examples`. Replace the `YOUR_API_KEY` placeholder in the examples with your client key, then:
+One file per task type, in [`examples`](./examples) — indexed there, with the code under `com.ezxlabs.ezcapsolver.examples`. Replace the `YOUR_API_KEY` placeholder in the examples with your client key, then:
 
 ```bash
 mvn -q compile
 mvn -q dependency:build-classpath -Dmdep.outputFile=target/cp.txt
 
 java -cp "target/classes:$(cat target/cp.txt)" \
-     com.burstlinker.ezcapsolver.examples.hcaptcha.HCaptcha
+     com.ezxlabs.ezcapsolver.examples.hcaptcha.HCaptcha
 ```
 
 The examples live in the source tree so the compiler checks them on every build, and are excluded from the published jar, sources jar and javadoc.

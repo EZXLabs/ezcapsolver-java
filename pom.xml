@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.burstlinker.ezcapsolver</groupId>
+  <groupId>com.ezxlabs</groupId>
   <artifactId>ezcapsolver-java</artifactId>
   <version>0.1.0</version>
   <packaging>jar</packaging>
@@ -86,8 +86,8 @@
       exclusion configured at all. A rule that reads as load-bearing but is not
       is worse than no rule.
     -->
-    <examples.package>com.burstlinker.ezcapsolver.examples</examples.package>
-    <examples.path>com/burstlinker/ezcapsolver/examples/**</examples.path>
+    <examples.package>com.ezxlabs.ezcapsolver.examples</examples.package>
+    <examples.path>com/ezxlabs/ezcapsolver/examples/**</examples.path>
 
     <!--
       Internals that are public only because Java 8 has no visibility between
@@ -95,7 +95,7 @@
       runtime, but kept out of the javadoc and the compatibility check. Internals
       the compiler can hide stay package-private in their own package instead.
     -->
-    <internal.package>com.burstlinker.ezcapsolver.internal</internal.package>
+    <internal.package>com.ezxlabs.ezcapsolver.internal</internal.package>
   </properties>
 
   <dependencies>
@@ -328,7 +328,7 @@
               OkHttp class as removed, which is both wrong and unreadable.
             -->
             <includes>
-              <include>com.burstlinker.ezcapsolver.*</include>
+              <include>com.ezxlabs.ezcapsolver.*</include>
             </includes>
             <excludes>
               <exclude>${internal.package}.*</exclude>

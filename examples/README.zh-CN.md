@@ -6,10 +6,10 @@
 
 ## 文件在哪
 
-示例**代码**在正常的源码树里,包名 `com.burstlinker.ezcapsolver.examples`:
+示例**代码**在正常的源码树里,包名 `com.ezxlabs.ezcapsolver.examples`:
 
 ```
-src/main/java/com/burstlinker/ezcapsolver/examples/
+src/main/java/com/ezxlabs/ezcapsolver/examples/
 ├── ClientSetup.java · Concurrency.java · RawUsage.java · LoggingAndErrors.java
 ├── akamai/ · cloudflare/ · datadome/ · funcaptcha/ · hcaptcha/
 ├── incapsula/ · perimeterx/ · recaptchav2/ · recaptchav3/ · tlsforward/
@@ -24,7 +24,7 @@ examples/
 
 > 因为示例被排除在 jar 之外,运行时要用 `target/classes` 而不是打好的 jar。下面的命令已经是这样写的。
 
-> **每次运行都会创建真实任务并扣费,无论 worker 是否成功。** 唯一的例外是 [`ClientSetup.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/ClientSetup.java),它调用的 `getBalance` 是唯一免费的端点。
+> **每次运行都会创建真实任务并扣费,无论 worker 是否成功。** 唯一的例外是 [`ClientSetup.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/ClientSetup.java),它调用的 `getBalance` 是唯一免费的端点。
 >
 > reCAPTCHA v2 和 hCaptcha 的示例指向厂商自己的 demo 页面,照着就能跑。其余的站点密钥都是占位符,需要你自己填。
 
@@ -37,7 +37,7 @@ mvn -q dependency:build-classpath -Dmdep.outputFile=target/cp.txt
 
 # 之后用全限定类名跑任意示例。
 java -cp "target/classes:$(cat target/cp.txt)" \
-     com.burstlinker.ezcapsolver.examples.hcaptcha.HCaptcha
+     com.ezxlabs.ezcapsolver.examples.hcaptcha.HCaptcha
 ```
 
 **在仓库根目录运行** —— 分类类示例会从 `examples/fixtures/` 读图片。
@@ -48,10 +48,10 @@ java -cp "target/classes:$(cat target/cp.txt)" \
 
 | 示例 | 讲什么 |
 | --- | --- |
-| [`ClientSetup.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/ClientSetup.java) | 全部配置项,以及两条超时预算为什么分开 |
-| [`Concurrency.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/Concurrency.java) | 多线程共享一个 client,并限制并发数 |
-| [`RawUsage.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/RawUsage.java) | 手动轮询,以及访问 SDK 尚未建模的任务类型 |
-| [`LoggingAndErrors.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/LoggingAndErrors.java) | 接入日志,以及区分各层失败 |
+| [`ClientSetup.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/ClientSetup.java) | 全部配置项,以及两条超时预算为什么分开 |
+| [`Concurrency.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/Concurrency.java) | 多线程共享一个 client,并限制并发数 |
+| [`RawUsage.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/RawUsage.java) | 手动轮询,以及访问 SDK 尚未建模的任务类型 |
+| [`LoggingAndErrors.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/LoggingAndErrors.java) | 接入日志,以及区分各层失败 |
 
 ## reCAPTCHA v2
 
@@ -59,12 +59,12 @@ java -cp "target/classes:$(cat target/cp.txt)" \
 
 | 示例 | 任务类型 |
 | --- | --- |
-| [`recaptchav2/ReCaptchaV2TaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav2/ReCaptchaV2TaskProxyless.java) | `ReCaptchaV2TaskProxyless` |
-| [`recaptchav2/ReCaptchaV2TaskProxylessS9.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav2/ReCaptchaV2TaskProxylessS9.java) | `ReCaptchaV2TaskProxylessS9` |
-| [`recaptchav2/ReCaptchaV2STaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav2/ReCaptchaV2STaskProxyless.java) | `ReCaptchaV2STaskProxyless` |
-| [`recaptchav2/ReCaptchaV2EnterpriseTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav2/ReCaptchaV2EnterpriseTaskProxyless.java) | `ReCaptchaV2EnterpriseTaskProxyless` |
-| [`recaptchav2/ReCaptchaV2SEnterpriseTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav2/ReCaptchaV2SEnterpriseTaskProxyless.java) | `ReCaptchaV2SEnterpriseTaskProxyless` |
-| [`recaptchav2/ReCaptchaV2Classification.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav2/ReCaptchaV2Classification.java) | `ReCaptchaV2Classification` |
+| [`recaptchav2/ReCaptchaV2TaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav2/ReCaptchaV2TaskProxyless.java) | `ReCaptchaV2TaskProxyless` |
+| [`recaptchav2/ReCaptchaV2TaskProxylessS9.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav2/ReCaptchaV2TaskProxylessS9.java) | `ReCaptchaV2TaskProxylessS9` |
+| [`recaptchav2/ReCaptchaV2STaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav2/ReCaptchaV2STaskProxyless.java) | `ReCaptchaV2STaskProxyless` |
+| [`recaptchav2/ReCaptchaV2EnterpriseTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav2/ReCaptchaV2EnterpriseTaskProxyless.java) | `ReCaptchaV2EnterpriseTaskProxyless` |
+| [`recaptchav2/ReCaptchaV2SEnterpriseTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav2/ReCaptchaV2SEnterpriseTaskProxyless.java) | `ReCaptchaV2SEnterpriseTaskProxyless` |
+| [`recaptchav2/ReCaptchaV2Classification.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav2/ReCaptchaV2Classification.java) | `ReCaptchaV2Classification` |
 
 ## reCAPTCHA v3
 
@@ -72,10 +72,10 @@ java -cp "target/classes:$(cat target/cp.txt)" \
 
 | 示例 | 任务类型 |
 | --- | --- |
-| [`recaptchav3/ReCaptchaV3TaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav3/ReCaptchaV3TaskProxyless.java) | `ReCaptchaV3TaskProxyless` |
-| [`recaptchav3/ReCaptchaV3TaskProxylessS9.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav3/ReCaptchaV3TaskProxylessS9.java) | `ReCaptchaV3TaskProxylessS9` |
-| [`recaptchav3/ReCaptchaV3EnterpriseTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav3/ReCaptchaV3EnterpriseTaskProxyless.java) | `ReCaptchaV3EnterpriseTaskProxyless` |
-| [`recaptchav3/ReCaptchaV3EnterpriseTaskProxylessS9.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/recaptchav3/ReCaptchaV3EnterpriseTaskProxylessS9.java) | `ReCaptchaV3EnterpriseTaskProxylessS9` |
+| [`recaptchav3/ReCaptchaV3TaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav3/ReCaptchaV3TaskProxyless.java) | `ReCaptchaV3TaskProxyless` |
+| [`recaptchav3/ReCaptchaV3TaskProxylessS9.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav3/ReCaptchaV3TaskProxylessS9.java) | `ReCaptchaV3TaskProxylessS9` |
+| [`recaptchav3/ReCaptchaV3EnterpriseTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav3/ReCaptchaV3EnterpriseTaskProxyless.java) | `ReCaptchaV3EnterpriseTaskProxyless` |
+| [`recaptchav3/ReCaptchaV3EnterpriseTaskProxylessS9.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/recaptchav3/ReCaptchaV3EnterpriseTaskProxylessS9.java) | `ReCaptchaV3EnterpriseTaskProxylessS9` |
 
 ## FunCaptcha / Arkose Labs
 
@@ -83,8 +83,8 @@ java -cp "target/classes:$(cat target/cp.txt)" \
 
 | 示例 | 任务类型 |
 | --- | --- |
-| [`funcaptcha/FuncaptchaTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/funcaptcha/FuncaptchaTaskProxyless.java) | `FuncaptchaTaskProxyless` |
-| [`funcaptcha/FunCaptchaClassification.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/funcaptcha/FunCaptchaClassification.java) | `FunCaptchaClassification` |
+| [`funcaptcha/FuncaptchaTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/funcaptcha/FuncaptchaTaskProxyless.java) | `FuncaptchaTaskProxyless` |
+| [`funcaptcha/FunCaptchaClassification.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/funcaptcha/FunCaptchaClassification.java) | `FunCaptchaClassification` |
 
 ## hCaptcha
 
@@ -92,37 +92,37 @@ java -cp "target/classes:$(cat target/cp.txt)" \
 
 | 示例 | 任务类型 |
 | --- | --- |
-| [`hcaptcha/HCaptcha.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/hcaptcha/HCaptcha.java) | `HCaptcha` |
-| [`hcaptcha/HCaptchaClassification.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/hcaptcha/HCaptchaClassification.java) | `HCaptchaClassification` |
+| [`hcaptcha/HCaptcha.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/hcaptcha/HCaptcha.java) | `HCaptcha` |
+| [`hcaptcha/HCaptchaClassification.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/hcaptcha/HCaptchaClassification.java) | `HCaptchaClassification` |
 
 ## Cloudflare
 
 | 示例 | 任务类型 |
 | --- | --- |
-| [`cloudflare/CloudFlare5STask.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/cloudflare/CloudFlare5STask.java) | `CloudFlare5STask` |
-| [`cloudflare/CloudFlareTurnstileTask.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/cloudflare/CloudFlareTurnstileTask.java) | `CloudFlareTurnstileTask` |
+| [`cloudflare/CloudFlare5STask.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/cloudflare/CloudFlare5STask.java) | `CloudFlare5STask` |
+| [`cloudflare/CloudFlareTurnstileTask.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/cloudflare/CloudFlareTurnstileTask.java) | `CloudFlareTurnstileTask` |
 
 ## Akamai
 
 | 示例 | 任务类型 |
 | --- | --- |
-| [`akamai/AkamaiWEBTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/akamai/AkamaiWEBTaskProxyless.java) | `AkamaiWEBTaskProxyless` |
-| [`akamai/AkamaiSBSDTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/akamai/AkamaiSBSDTaskProxyless.java) | `AkamaiSBSDTaskProxyless` |
+| [`akamai/AkamaiWEBTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/akamai/AkamaiWEBTaskProxyless.java) | `AkamaiWEBTaskProxyless` |
+| [`akamai/AkamaiSBSDTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/akamai/AkamaiSBSDTaskProxyless.java) | `AkamaiSBSDTaskProxyless` |
 
 ## DataDome
 
 | 示例 | 任务类型 |
 | --- | --- |
-| [`datadome/DataDomeTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/datadome/DataDomeTaskProxyless.java) | `DataDomeTaskProxyless` |
-| [`datadome/DataDomeTagsTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/datadome/DataDomeTagsTaskProxyless.java) | `DataDomeTagsTaskProxyless` |
+| [`datadome/DataDomeTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/datadome/DataDomeTaskProxyless.java) | `DataDomeTaskProxyless` |
+| [`datadome/DataDomeTagsTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/datadome/DataDomeTagsTaskProxyless.java) | `DataDomeTagsTaskProxyless` |
 
 ## 其它防护系统
 
 | 示例 | 任务类型 |
 | --- | --- |
-| [`perimeterx/PerimeterX.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/perimeterx/PerimeterX.java) | `PerimeterX` |
-| [`incapsula/IncapsulaTaskProxyless.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/incapsula/IncapsulaTaskProxyless.java) | `IncapsulaTaskProxyless` |
-| [`tlsforward/TlsTask.java`](../src/main/java/com/burstlinker/ezcapsolver/examples/tlsforward/TlsTask.java) | `TlsTask` |
+| [`perimeterx/PerimeterX.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/perimeterx/PerimeterX.java) | `PerimeterX` |
+| [`incapsula/IncapsulaTaskProxyless.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/incapsula/IncapsulaTaskProxyless.java) | `IncapsulaTaskProxyless` |
+| [`tlsforward/TlsTask.java`](../src/main/java/com/ezxlabs/ezcapsolver/examples/tlsforward/TlsTask.java) | `TlsTask` |
 
 ## Fixtures
 
