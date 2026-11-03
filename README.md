@@ -126,6 +126,8 @@ The Maven `groupId` is `com.ezxlabs`; Java imports use `com.ezxlabs.ezcapsolver`
 
 Replace `YOUR_API_KEY` with your client key. When the configuration carries no explicit key, the client reads `EZCAPSOLVER_API_KEY` from the environment.
 
+For the complete API flow, see the [CAPTCHA quick start](https://docs.ezxlabs.com/docs/captcha/guide).
+
 ```java
 import com.ezxlabs.ezcapsolver.EzCapSolverClient;
 import com.ezxlabs.ezcapsolver.model.Solved;
@@ -164,6 +166,8 @@ Solved<ReCaptchaSolution> b = client.syncSolveReCaptchaV2TaskProxyless(params);
 ### reCAPTCHA v2
 
 [reCAPTCHA v2 API reference](https://docs.ezxlabs.com/docs/captcha/api/recaptcha-v2)
+
+For help choosing a task type and finding `websiteURL`, `websiteKey` or `pageAction`, see [Select the correct ReCaptcha task type](https://docs.ezxlabs.com/docs/captcha/tutorials/identify-recaptcha-version) and [Find ReCaptcha task parameters](https://docs.ezxlabs.com/docs/captcha/tutorials/find-recaptcha-parameters).
 
 The first five types share `ReCaptchaV2TaskParams` and `ReCaptchaSolution`; only the method name differs.
 
@@ -318,6 +322,8 @@ System.out.println(solved.getSolution().getToken());
 
 <a id="FunCaptchaClassification"></a>
 
+[FunCaptcha image classification API reference](https://docs.ezxlabs.com/docs/captcha/api/funcaptcha-classification)
+
 #### FunCaptchaClassification
 
 ```java
@@ -455,6 +461,8 @@ System.out.println(solved.getSolution().getPayload());
 ```
 
 ### DataDome
+
+[DataDome API reference](https://docs.ezxlabs.com/docs/captcha/api/datadome)
 
 <a id="DataDomeTaskProxyless"></a>
 

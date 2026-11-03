@@ -126,6 +126,8 @@ Maven 的 `groupId` 为 `com.ezxlabs`，Java 导入包名为 `com.ezxlabs.ezcaps
 
 将 `YOUR_API_KEY` 替换为你的密钥。配置里没有显式提供 key 时,客户端会从环境变量 `EZCAPSOLVER_API_KEY` 读取。
 
+完整 API 接入流程请查看 [EZCaptchaSolver 快速入门](https://docs.ezxlabs.com/zh/docs/captcha/guide)。
+
 ```java
 import com.ezxlabs.ezcapsolver.EzCapSolverClient;
 import com.ezxlabs.ezcapsolver.model.Solved;
@@ -164,6 +166,8 @@ Solved<ReCaptchaSolution> b = client.syncSolveReCaptchaV2TaskProxyless(params);
 ### reCAPTCHA v2
 
 [reCAPTCHA v2 API 文档](https://docs.ezxlabs.com/zh/docs/captcha/api/recaptcha-v2)
+
+选择任务类型或查找 `websiteURL`、`websiteKey`、`pageAction` 时，请查看 [ReCaptcha 任务类型选择](https://docs.ezxlabs.com/zh/docs/captcha/tutorials/identify-recaptcha-version) 和 [ReCaptcha 任务参数查找](https://docs.ezxlabs.com/zh/docs/captcha/tutorials/find-recaptcha-parameters)。
 
 前五种共用 `ReCaptchaV2TaskParams` 和 `ReCaptchaSolution`,只有方法名不同。
 
@@ -318,6 +322,8 @@ System.out.println(solved.getSolution().getToken());
 
 <a id="FunCaptchaClassification"></a>
 
+[FunCaptcha 图片识别 API 文档](https://docs.ezxlabs.com/zh/docs/captcha/api/funcaptcha-classification)
+
 #### FunCaptchaClassification
 
 ```java
@@ -455,6 +461,8 @@ System.out.println(solved.getSolution().getPayload());
 ```
 
 ### DataDome
+
+[DataDome API 文档](https://docs.ezxlabs.com/zh/docs/captcha/api/datadome)
 
 <a id="DataDomeTaskProxyless"></a>
 
