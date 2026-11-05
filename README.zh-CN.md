@@ -22,7 +22,7 @@
 
 ---
 
-EZCaptchaSolver Java SDK 是 [EZXLabs](https://ezxlabs.com) 维护的开源 Java 客户端，用于接入其 CAPTCHA 识别任务 API。它为下列受支持的任务类型提供类型化请求和线程安全的客户端；该库还包含不用于解验证码的 TLS 转发任务。了解 SDK 产品系列请查看 [EZCaptchaSolver SDK 产品页](https://ezxlabs.com/zh/products/sdk)，查看 HTTP 请求与响应字段请访问 [EZCaptchaSolver API 文档](https://docs.ezxlabs.com/zh/docs/captcha/api)，Java 调用代码请以[本仓库示例](./examples/README.zh-CN.md)为准。
+EZCaptchaSolver Java SDK 是 [EZXLabs](https://ezxlabs.com) 维护的开源 Java 客户端，用于接入其 [CAPTCHA 识别任务 API](https://ezxlabs.com/zh/products/captcha)。它为下列受支持的任务类型提供类型化请求和线程安全的客户端；该库还包含不用于解验证码的 TLS 转发任务。了解 SDK 产品系列请查看 [EZCaptchaSolver SDK 产品页](https://ezxlabs.com/zh/products/sdk)，查看 HTTP 请求与响应字段请访问 [EZCaptchaSolver API 文档](https://docs.ezxlabs.com/zh/docs/captcha/api)，Java 调用代码请以[本仓库示例](./examples/README.zh-CN.md)为准。
 
 ## 🧩 支持的验证码类型
 

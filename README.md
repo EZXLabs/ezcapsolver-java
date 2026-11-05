@@ -22,7 +22,7 @@
 
 ---
 
-The EZCaptchaSolver Java SDK is an open-source Java client maintained by [EZXLabs](https://ezxlabs.com) for its CAPTCHA recognition task API. It provides typed requests and a thread-safe client for the supported task types below; the library also includes a TLS forwarding task that does not solve CAPTCHAs. For the wider SDK family, see the [EZCaptchaSolver SDK product page](https://ezxlabs.com/products/sdk); for HTTP request and response fields, see the [EZCaptchaSolver API reference](https://docs.ezxlabs.com/docs/captcha/api); for Java usage, see the [examples in this repository](./examples/README.md).
+The EZCaptchaSolver Java SDK is an open-source Java client maintained by [EZXLabs](https://ezxlabs.com) for its [CAPTCHA recognition task API](https://ezxlabs.com/products/captcha). It provides typed requests and a thread-safe client for the supported task types below; the library also includes a TLS forwarding task that does not solve CAPTCHAs. For the wider SDK family, see the [EZCaptchaSolver SDK product page](https://ezxlabs.com/products/sdk); for HTTP request and response fields, see the [EZCaptchaSolver API reference](https://docs.ezxlabs.com/docs/captcha/api); for Java usage, see the [examples in this repository](./examples/README.md).
 
 ## 🧩 Supported Captcha Types
 
