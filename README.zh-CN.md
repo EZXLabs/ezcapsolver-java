@@ -71,8 +71,8 @@ EZCaptchaSolver Java SDK 是 [EZXLabs](https://ezxlabs.com) 维护的开源 Java
 
 | 任务类型 | 形态 | 示例 | 说明 |
 | :-: | :---: | :-: | --- |
-| `CloudFlare5STask` | async | [示例](#CloudFlare5STask) | [CF 五秒盾](https://ezxlabs.com/zh/products/cloudflare-5s),**必须**提供 `proxy` |
-| `CloudFlareTurnstileTask` | async | [示例](#CloudFlareTurnstileTask) | [Turnstile](https://ezxlabs.com/zh/products/cloudflare-turnstile),返回 token |
+| `CloudFlare5STask` | async | [示例](#CloudFlare5STask) | [Cloudflare 5 秒盾](https://ezxlabs.com/zh/products/cloudflare-5s)，**必须**传 `proxy`；返回浏览器状态而非 token |
+| `CloudFlareTurnstileTask` | async | [示例](#CloudFlareTurnstileTask) | [Cloudflare Turnstile](https://ezxlabs.com/zh/products/cloudflare-turnstile)，返回 token |
 
 ### [Akamai](https://ezxlabs.com/zh/products/akamai)
 
@@ -90,13 +90,13 @@ EZCaptchaSolver Java SDK 是 [EZXLabs](https://ezxlabs.com) 维护的开源 Java
 | `DataDomeTaskProxyless` | sync | [示例](#DataDomeTaskProxyless) | 被拦截后的挑战,分两步,由 `step` 选择 |
 | `DataDomeTagsTaskProxyless` | sync | [示例](#DataDomeTagsTaskProxyless) | 在正常浏览路径上上报指纹 |
 
-### 其它
+### 其他防护与转发任务
 
 | 任务类型 | 形态 | 示例 | 说明 |
 | :-: | :---: | :-: | --- |
-| `PerimeterX` | async | [示例](#PerimeterX) | [PerimeterX 放行 cookie](https://ezxlabs.com/zh/products/perimeterx) |
-| `IncapsulaTaskProxyless` | sync | [示例](#IncapsulaTaskProxyless) | [Incapsula Reese84 载荷](https://ezxlabs.com/zh/products/incapsula) |
-| `TlsTask` | sync | [示例](#TlsTask) | [经 TLS 转发一次 HTTP 请求](https://ezxlabs.com/zh/products/tls-forward),返回上游响应 |
+| `PerimeterX` | async | [示例](#PerimeterX) | [PerimeterX](https://ezxlabs.com/zh/products/perimeterx) 长按验证；返回 `_px3` 等放行 cookie |
+| `IncapsulaTaskProxyless` | sync | [示例](#IncapsulaTaskProxyless) | [Incapsula](https://ezxlabs.com/zh/products/incapsula) Reese84 验证；返回提交给 Imperva 的载荷 |
+| `TlsTask` | sync | [示例](#TlsTask) | [TLS 指纹转发](https://ezxlabs.com/zh/products/tls-forward)：按所选浏览器指纹经代理转发 HTTPS 请求，并返回上游响应 |
 
 ## 📦 安装
 
