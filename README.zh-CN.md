@@ -33,7 +33,7 @@ EZCaptchaSolver Java SDK 是 [EZXLabs](https://ezxlabs.com) 维护的开源 Java
 
 一种验证码类型可以同时支持两种形态,绝大多数类型都支持同步形态,少数类型只支持异步。
 
-### reCAPTCHA v2
+### [reCAPTCHA v2](https://ezxlabs.com/zh/products/recaptchav2)
 
 | 任务类型 | 形态 | 示例 | 说明 |
 | :-: | :---: | :-: | --- |
@@ -42,9 +42,9 @@ EZCaptchaSolver Java SDK 是 [EZXLabs](https://ezxlabs.com) 维护的开源 Java
 | `ReCaptchaV2STaskProxyless` | all | [示例](#ReCaptchaV2STaskProxyless) | reCAPTCHA v2,带挑战绑定的 `s` 参数 |
 | `ReCaptchaV2EnterpriseTaskProxyless` | all | [示例](#ReCaptchaV2EnterpriseTaskProxyless) | reCAPTCHA v2 Enterprise |
 | `ReCaptchaV2SEnterpriseTaskProxyless` | all | [示例](#ReCaptchaV2SEnterpriseTaskProxyless) | reCAPTCHA v2 Enterprise,带 `s` 参数 |
-| `ReCaptchaV2Classification` | sync | [示例](#ReCaptchaV2Classification) | reCAPTCHA v2 图像识别 |
+| `ReCaptchaV2Classification` | sync | [示例](#ReCaptchaV2Classification) | [reCAPTCHA v2 图像识别](https://ezxlabs.com/zh/products/image-captcha) |
 
-### reCAPTCHA v3
+### [reCAPTCHA v3](https://ezxlabs.com/zh/products/recaptchav3)
 
 | 任务类型 | 形态 | 示例 | 说明 |
 | :-: | :---: | :-: | --- |
@@ -53,14 +53,14 @@ EZCaptchaSolver Java SDK 是 [EZXLabs](https://ezxlabs.com) 维护的开源 Java
 | `ReCaptchaV3EnterpriseTaskProxyless` | all | [示例](#ReCaptchaV3EnterpriseTaskProxyless) | reCAPTCHA v3 Enterprise |
 | `ReCaptchaV3EnterpriseTaskProxylessS9` | all | [示例](#ReCaptchaV3EnterpriseTaskProxylessS9) | reCAPTCHA v3 Enterprise,返回评分 ≥ 0.9 的 token |
 
-### FunCaptcha / Arkose Labs
+### [FunCaptcha / Arkose Labs](https://ezxlabs.com/zh/products/funcaptcha)
 
 | 任务类型 | 形态 | 示例 | 说明 |
 | :-: | :---: | :-: | --- |
 | `FuncaptchaTaskProxyless` | async | [示例](#FuncaptchaTaskProxyless) | FunCaptcha / Arkose Labs |
 | `FunCaptchaClassification` | sync | [示例](#FunCaptchaClassification) | FunCaptcha 图像识别 |
 
-### hCaptcha
+### [hCaptcha](https://ezxlabs.com/zh/products/hcaptcha)
 
 | 任务类型 | 形态 | 示例 | 说明 |
 | :-: | :---: | :-: | --- |
@@ -71,10 +71,10 @@ EZCaptchaSolver Java SDK 是 [EZXLabs](https://ezxlabs.com) 维护的开源 Java
 
 | 任务类型 | 形态 | 示例 | 说明 |
 | :-: | :---: | :-: | --- |
-| `CloudFlare5STask` | async | [示例](#CloudFlare5STask) | CF 五秒盾,**必须**提供 `proxy` |
-| `CloudFlareTurnstileTask` | async | [示例](#CloudFlareTurnstileTask) | Turnstile,返回 token |
+| `CloudFlare5STask` | async | [示例](#CloudFlare5STask) | [CF 五秒盾](https://ezxlabs.com/zh/products/cloudflare-5s),**必须**提供 `proxy` |
+| `CloudFlareTurnstileTask` | async | [示例](#CloudFlareTurnstileTask) | [Turnstile](https://ezxlabs.com/zh/products/cloudflare-turnstile),返回 token |
 
-### Akamai
+### [Akamai](https://ezxlabs.com/zh/products/akamai)
 
 | 任务类型 | 形态 | 示例 | 说明 |
 | :-: | :---: | :-: | --- |
@@ -83,7 +83,7 @@ EZCaptchaSolver Java SDK 是 [EZXLabs](https://ezxlabs.com) 维护的开源 Java
 
 > Akamai Web 是多轮流程:把上一轮返回的 `encodedata` 作为下一轮的 `encodeData` 传回去。这两个拼写在线格式上确实不一样,SDK 保留服务端的定义原样,不去「纠正」它。
 
-### DataDome
+### [DataDome](https://ezxlabs.com/zh/products/datadome)
 
 | 任务类型 | 形态 | 示例 | 说明 |
 | :-: | :---: | :-: | --- |
@@ -94,9 +94,9 @@ EZCaptchaSolver Java SDK 是 [EZXLabs](https://ezxlabs.com) 维护的开源 Java
 
 | 任务类型 | 形态 | 示例 | 说明 |
 | :-: | :---: | :-: | --- |
-| `PerimeterX` | async | [示例](#PerimeterX) | PerimeterX 放行 cookie |
-| `IncapsulaTaskProxyless` | sync | [示例](#IncapsulaTaskProxyless) | Incapsula Reese84 载荷 |
-| `TlsTask` | sync | [示例](#TlsTask) | 经 TLS 转发一次 HTTP 请求,返回上游响应 |
+| `PerimeterX` | async | [示例](#PerimeterX) | [PerimeterX 放行 cookie](https://ezxlabs.com/zh/products/perimeterx) |
+| `IncapsulaTaskProxyless` | sync | [示例](#IncapsulaTaskProxyless) | [Incapsula Reese84 载荷](https://ezxlabs.com/zh/products/incapsula) |
+| `TlsTask` | sync | [示例](#TlsTask) | [经 TLS 转发一次 HTTP 请求](https://ezxlabs.com/zh/products/tls-forward),返回上游响应 |
 
 ## 📦 安装
 
